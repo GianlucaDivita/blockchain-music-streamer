@@ -12,6 +12,7 @@ ABSTRACT: A platform on block chain that mimics a service like Spotify or Apple 
 
 ![Blank diagram (1)](https://user-images.githubusercontent.com/10506708/208255466-b0aaa3be-e927-4558-a058-bed7b9d5d4f7.jpeg)
 
+# VIDEO DEMOSTRATION
 
-
+https://user-images.githubusercontent.com/10506708/208256226-9aaef12b-12ed-4ac1-a9da-a4a728746c69.mp4
 
