@@ -1,62 +1,62 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { ethers } from 'ethers';
+import React from "react";
+import { useEffect, useState } from "react";
+import { ethers } from "ethers";
 
 // Import the contract artifact
-import MyMusicStreamingService from '../contracts/MyMusicStreamingService.json';
+import MyMusicStreamingService from "contract/MyMusicStreamingService.json";
 
 function App() {
   // Declare state variables
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
-  const [artistAddress, setArtistAddress] = useState('');
+  const [artistAddress, setArtistAddress] = useState("");
   const [artistInteractions, setArtistInteractions] = useState(null);
   const [totalInteractions, setTotalInteractions] = useState(null);
   const [contractBalance, setContractBalance] = useState(null);
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState("");
 
   useEffect(() => {
     // Connect to the Ethereum provider
     async function requestAccount() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    setProvider(provider);
-    
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      setProvider(provider);
 
-    // Get the contract address from the deployment
-    const contractAddress = '0xec30b61495d0053874251a9925c6cbf5';
+      // Get the contract address from the deployment
+      const contractAddress = "0xec30b61495d0053874251a9925c6cbf5";
 
-    // Connect to the contract
-    const contract = new ethers.Contract(
-      contractAddress,
-      MyMusicStreamingService.abi,
-      provider.getSigner()
-    );
-    setContract(contract);
+      // Connect to the contract
+      const contract = new ethers.Contract(
+        contractAddress,
+        MyMusicStreamingService.abi,
+        provider.getSigner()
+      );
+      setContract(contract);
 
-    // Get the artist interactions and total interactions from the
-    // Get the artist interactions and total interactions from the contract
-    const [artistInteractions, totalInteractions] = await Promise.all([
-      contract.artistInteractions(),
-      contract.totalInteractions()
-    ]);
-    setArtistInteractions(artistInteractions);
-    setTotalInteractions(totalInteractions);
+      // Get the artist interactions and total interactions from the
+      // Get the artist interactions and total interactions from the contract
+      const [artistInteractions, totalInteractions] = await Promise.all([
+        contract.artistInteractions(),
+        contract.totalInteractions(),
+      ]);
+      setArtistInteractions(artistInteractions);
+      setTotalInteractions(totalInteractions);
 
-    // Get the contract balance from the contract
-    const contractBalance = await contract.getContractBalance();
-    setContractBalance(contractBalance);
-  }}, []);
+      // Get the contract balance from the contract
+      const contractBalance = await contract.getContractBalance();
+      setContractBalance(contractBalance);
+    }
+  }, []);
 
   // Function to add an artist to the platform
   async function handleAddArtist(artistAddress) {
     // Call the contract's addArtist function
     await contract.addArtist(artistAddress);
-    setArtistAddress('');
+    setArtistAddress("");
 
     // Update the artist interactions and total interactions
     const [artistInteractions, totalInteractions] = await Promise.all([
       contract.artistInteractions(),
-      contract.totalInteractions()
+      contract.totalInteractions(),
     ]);
     setArtistInteractions(artistInteractions);
     setTotalInteractions(totalInteractions);
@@ -70,7 +70,7 @@ function App() {
     // Update the artist interactions and total interactions
     const [artistInteractions, totalInteractions] = await Promise.all([
       contract.artistInteractions(),
-      contract.totalInteractions()
+      contract.totalInteractions(),
     ]);
     setArtistInteractions(artistInteractions);
     setTotalInteractions(totalInteractions);
@@ -117,29 +117,24 @@ function App() {
           <input type="submit" value="Submit" />
         </form>
       </div>
-      {artistInteractions ? (
-        Object.keys(artistInteractions).map((artist) => (
-          <p key={artist}>
-            <button onClick={() => handleIncrementArtistInteraction(artist)}>
-              Increment Artist Interaction
-            </button>
-            {' '}
-            {artist}: {artistInteractions[artist]}
-          </p>
-        ))
-      ) : null}
+      {artistInteractions
+        ? Object.keys(artistInteractions).map((artist) => (
+            <p key={artist}>
+              <button onClick={() => handleIncrementArtistInteraction(artist)}>
+                Increment Artist Interaction
+              </button>{" "}
+              {artist}: {artistInteractions[artist]}
+            </p>
+          ))
+        : null}
       {totalInteractions ? (
         <p>
-          <strong>Total Interactions:</strong>
-          {' '}
-          {totalInteractions}
+          <strong>Total Interactions:</strong> {totalInteractions}
         </p>
       ) : null}
       {contractBalance ? (
         <p>
-          <strong>Contract Balance:</strong>
-          {' '}
-          {contractBalance}
+          <strong>Contract Balance:</strong> {contractBalance}
         </p>
       ) : null}
       <div>
