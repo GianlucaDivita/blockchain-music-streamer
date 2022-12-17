@@ -1,9 +1,9 @@
 # Blockchain Music Streamer
 
-Gianluca Di Vita - 101415332
-Nader Fathzadeh - 101441256
-Umut Yorulmaz - 101410083
-Sarim Sohail - 101416162
+# Gianluca Di Vita - 101415332
+# Nader Fathzadeh - 101441256
+# Umut Yorulmaz - 101410083
+# Sarim Sohail - 101416162
 
 ABSTRACT: A platform on block chain that mimics a service like Spotify or Apple Music. The logic will have a user deposit a subscription fee and then be able to interact (play music) from an artist (or many). Each iteration is counted and after a given time the subscription fee is paid out in proportion to how many interactions the user has had with each artist. The more interactions mean a larger cut of the subscription payout. 
 
