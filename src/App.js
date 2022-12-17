@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 
 // Import the contract artifact
-import MyMusicStreamingService from "contract/MyMusicStreamingService.json";
+import MyMusicStreamingService from "contract/Platform.json";
 
 function App() {
   // Declare state variables
@@ -22,7 +22,7 @@ function App() {
       setProvider(provider);
 
       // Get the contract address from the deployment
-      const contractAddress = "0xec30b61495d0053874251a9925c6cbf5";
+      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
       // Connect to the contract
       const contract = new ethers.Contract(

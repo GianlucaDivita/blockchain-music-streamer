@@ -2,12 +2,13 @@
 
 pragma solidity ^0.8.17;
 
-contract MyMusicStreamingService {
+contract Platform {
     // Define the state variables
     address payable [] private artists;
     mapping(address => uint256) public artistInteractions;
     uint256 public totalInteractions;
     // uint256 public totalArtists;
+    // test
 
     // Define a function to add an artist to the platform
     function addArtist(address payable artist) public {
