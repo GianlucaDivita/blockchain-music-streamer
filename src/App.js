@@ -149,27 +149,30 @@ function App() {
 
 
 
-    // Call the distributeFunds function of the contract
-    const distributeFunds = async () => {
-      try {
-        const initialBalance = await contract.getContractBalance();
+// Call the distributeFunds function of the contract
+const distributeFunds = async () => {
+  try {
+    const initialBalance = await contract.getContractBalance();
 
-        const tx = {
-          // other fields of the transaction object
-          gasLimit: 20000000000, // specify the gas limit here
-        };
+    // Get the current block and the gas limit
+    const getBlock = await provider.getBlock();
+    const gasLimit = getBlock.gasLimit 
+    
 
-        await window.ethereum.sendAsync({ method: 'eth_requestAccounts', tx});
-        await contract.distributeFunds();
-        const updatedBalance = await contract.getContractBalance();
-        const valueSent = initialBalance.sub(updatedBalance);
+    // Send the transaction with the gas limit specified
+    await window.ethereum.sendAsync({ method: 'eth_requestAccounts', gasLimit});
+    await contract.distributeFunds();
+    const updatedBalance = await contract.getContractBalance();
+    const valueSent = initialBalance.sub(updatedBalance);
 
-        setBalance(updatedBalance);
-        setValueSent(valueSent);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    setBalance(updatedBalance);
+    setValueSent(valueSent);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
 
   React.useEffect((artistInfo, setArtistInfo) => {
     const updateInteractions = async () => {
